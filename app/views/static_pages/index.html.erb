@@ -1,0 +1,12 @@
+<%= form_tag("/", method: :get) do %>
+  <%= text_field_tag :user_id, params[:user_id] %>
+  <%= submit_tag "Fetch photos" %>
+<% end %>
+
+<% if @photos %>
+	  <% @photos.each do |photo| %>
+      <%= image_tag(FlickRaw.url_m(flickr.photos.getInfo(photo_id: photo.id))) %>
+    <% end %>
+<% end %>
+
+<%= debug(params) if Rails.env.development? %>
